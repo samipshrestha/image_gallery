@@ -1,4 +1,4 @@
-;(function(){
+;(function($){
 	'use strict';
 /**
  * [ImageOverlay Overlay with transparent div]
@@ -134,8 +134,8 @@
 	}
 
 // Main function
-	$(document).ready(function(){
-		var that = this,
+	$.fn.imageGallery = function(){
+		var _this = this,
 		checkElement = function(evt){
 			if( !$('.center-box > img').is(evt.target) && !$('.center-box .nav-wrapper').is(evt.target) && !$('.center-box .btn-next').is(evt.target) && !$('.center-box .btn-prev').is(evt.target) )
 				return true;
@@ -143,7 +143,7 @@
 				return false;
 		};
 
-		$('.gallery').on('click', 'img', function(e){
+		$(_this).on('click', 'img', function(e){
 			// debugger;
 			var imgOverlay = new ImageOverlay(),	
 			imgContainer = new ImageDisplay(),
@@ -159,8 +159,8 @@
 				// console.log(e.target);
 				// debugger;
 
-				$('.main-wrapper').append(imgOverlay.overlay);
-				$('.main-wrapper').append(imgContainer.imageContainer);
+				$(_this).parent().append(imgOverlay.overlay);
+				$(_this).parent().append(imgContainer.imageContainer);
 			}
 
 			function init(){
@@ -169,8 +169,8 @@
 			
 			init();
 		});
-
-		$('.main-wrapper').on('click', '.overlay, .image-box', function(e){
+		console.log($(_this).parent());
+		$($(_this).parent()).on('click', '.overlay, .image-box', function(e){
 			if( checkElement(e) )
 			{
 				$('.overlay').remove();
@@ -178,7 +178,7 @@
 			}
 		});
 
-	});
+	};
 
 
-})();
+})(jQuery);
