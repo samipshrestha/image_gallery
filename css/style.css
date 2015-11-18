@@ -1,0 +1,126 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+*.after{
+	clear: both;
+	content: '';
+	display: block;
+}
+
+body{
+	background: #bababa;
+}
+
+.main-wrapper{
+	position: relative;
+}
+
+.gallery{
+	width: 850px;
+	margin: 0 auto;
+	background: #cecece;
+}
+
+.gallery .img{
+	float: left;
+	cursor: pointer;
+	margin: 5px 10px;
+	margin-right: 0px;
+}
+
+.gallery img{
+	height: 125px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.gallery > .img:hover > img{
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+}
+.overlay{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: #000;
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.image-box{
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-top: 15px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+.center-box{
+	text-align: center;
+}
+
+.center-box img:hover{
+	cursor: pointer;
+}
+
+.btn-prev{
+	width:64px; 
+	height:64px;
+	display:inline-block; 
+	background: url(../images/btn-prev.png) no-repeat;
+	background-size: cover;
+	opacity: 1;
+	cursor: pointer;
+	margin-top: 16%;
+	margin-right: 10px;
+	-webkit-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.btn-prev:hover{
+	background-size: cover;
+	-webkit-transform: translateX(-15px);
+	-ms-transform: translateX(-15px);
+	-o-transform: translateX(-15px);
+	transform: translateX(-15px);
+}
+
+.btn-next{
+	width:64px; 
+	height:64px;
+	display:inline-block;
+	background: url(../images/btn-next.png) no-repeat;
+	opacity: 1;
+	background-size: cover;
+	cursor: pointer;
+	margin-top: 16%;
+	margin-left: 10px;
+	/*margin-top: calc( 50% - 32px );*/
+	-webkit-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.btn-next:hover{
+	background-size: cover;
+	-webkit-transform: translateX(15px);
+	-ms-transform: translateX(15px);
+	-o-transform: translateX(15px);
+	transform: translateX(15px);
+}
+
+.nav-wrapper{
+	width: 800px;
+	height: 100px;
+	background: #A9ABAB;
+	opacity: 0.7;
+	margin: 20px auto 0;
+}
