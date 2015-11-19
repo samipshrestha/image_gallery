@@ -41,7 +41,7 @@
 		});
 	};
 /**
- * [ImageOverlay Overlay with transparent div]
+ * [ImageOverlay creates overlay with transparent div]
  */
 	function ImageOverlay(){
 		this.overlay = document.createElement('div');
@@ -54,7 +54,7 @@
 	}
 
 /**
- * [ImageDisplay Container that contains pop up images]
+ * [ImageDisplay creates container that contains pop up images]
  */
 	function ImageDisplay(){
 		var that = this;
@@ -86,7 +86,7 @@
 	}
 
 /**
- * [setNavigationButtons For ]
+ * [setNavigationButtons sets nvigation button properties and functions]
  * @param {[type]} currentImageElement [clicked img tag]
  */
 	function SetNavigationButtons( currentImageElement ){
