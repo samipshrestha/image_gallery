@@ -1,5 +1,45 @@
 ;(function($){
 	'use strict';
+
+	// Main function
+	$.fn.imageGallery = function(){
+		var _this = this,
+		checkElement = function(evt){
+			if( !$('.center-box > img').is(evt.target) && !$('.center-box .nav-wrapper').is(evt.target) && !$('.center-box .btn-next').is(evt.target) && !$('.center-box .btn-prev').is(evt.target) )
+				return true;
+			else
+				return false;
+		};
+
+		$(_this).on('click', 'img', function(e){
+			var imgOverlay = new ImageOverlay(),	
+			imgContainer = new ImageDisplay(),
+			curImage = new CurrentImage( $(this).attr('src') ),
+			navigaitonButtons = new SetNavigationButtons( e.target );
+			
+			function appendToMainWrapper(){
+				$(imgContainer.centerDiv).append(navigaitonButtons.prevButton);
+				$(imgContainer.centerDiv).append(curImage.currentImage);
+				$(imgContainer.centerDiv).append(navigaitonButtons.nextButton);
+				
+				$(_this).parent().append(imgOverlay.overlay);
+				$(_this).parent().append(imgContainer.imageContainer);
+			}
+
+			function init(){
+				appendToMainWrapper();
+			}
+			
+			init();
+		});
+		$($(_this).parent()).on('click', '.overlay, .image-box', function(e){
+			if( checkElement(e) )
+			{
+				$('.overlay').remove();
+				$('.image-box').remove();
+			}
+		});
+	};
 /**
  * [ImageOverlay Overlay with transparent div]
  */
@@ -45,7 +85,11 @@
 		});
 	}
 
-	function setNavigationButtons( currentImageElement ){
+/**
+ * [setNavigationButtons For ]
+ * @param {[type]} currentImageElement [clicked img tag]
+ */
+	function SetNavigationButtons( currentImageElement ){
 		this.nextButton = document.createElement('div'),
 		this.prevButton = document.createElement('div');
 		var nextImageElement = $(currentImageElement).parent().next().find('img'),
@@ -76,7 +120,6 @@
 
 		// Click event for prev button
 		$(document).on('click', '.btn-prev',function(e){
-			// debugger;
 			if( $('.center-box > img').attr('src') ===  $(firstImageElement).find('img').attr('src') ){
 				e.preventDefault();
 			}
@@ -130,55 +173,5 @@
 
 			prevImageElement = $(prevImageElement).parent().prev().find('img');//update previous image
 		}
-		
 	}
-
-// Main function
-	$.fn.imageGallery = function(){
-		var _this = this,
-		checkElement = function(evt){
-			if( !$('.center-box > img').is(evt.target) && !$('.center-box .nav-wrapper').is(evt.target) && !$('.center-box .btn-next').is(evt.target) && !$('.center-box .btn-prev').is(evt.target) )
-				return true;
-			else
-				return false;
-		};
-
-		$(_this).on('click', 'img', function(e){
-			// debugger;
-			var imgOverlay = new ImageOverlay(),	
-			imgContainer = new ImageDisplay(),
-			curImage = new CurrentImage( $(this).attr('src') ),
-			navigaitonButtons = new setNavigationButtons( e.target );
-
-			
-			function appendToMainWrapper(){
-				$(imgContainer.centerDiv).append(navigaitonButtons.prevButton);
-				$(imgContainer.centerDiv).append(curImage.currentImage);
-				$(imgContainer.centerDiv).append(navigaitonButtons.nextButton);
-
-				// console.log(e.target);
-				// debugger;
-
-				$(_this).parent().append(imgOverlay.overlay);
-				$(_this).parent().append(imgContainer.imageContainer);
-			}
-
-			function init(){
-				appendToMainWrapper();
-			}
-			
-			init();
-		});
-		console.log($(_this).parent());
-		$($(_this).parent()).on('click', '.overlay, .image-box', function(e){
-			if( checkElement(e) )
-			{
-				$('.overlay').remove();
-				$('.image-box').remove();
-			}
-		});
-
-	};
-
-
 })(jQuery);
