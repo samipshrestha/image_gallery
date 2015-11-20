@@ -18,6 +18,9 @@
 			navigaitonButtons = new SetNavigationButtons( e.target );
 			
 			function appendToMainWrapper(){
+				$(imgContainer.centerDiv).addClass( $(e.target).parent().attr('class') );
+				$(imgContainer.centerDiv).removeClass('ui-sortable-handle');
+
 				$(imgContainer.centerDiv).append(navigaitonButtons.prevButton);
 				$(imgContainer.centerDiv).append(curImage.currentImage);
 				$(imgContainer.centerDiv).append(navigaitonButtons.nextButton);
@@ -97,38 +100,63 @@
 		$images = $('.gallery div').siblings(),
 		totalImages = $images.length,
 		firstImageElement = $images[0],
-		lastImageElement = $images[totalImages-1];
+		lastImageElement = $images[totalImages-1],
+		checkIfFirstImage = function(){
+			var firstImageClass = $(firstImageElement).attr('class').split(' ');
+			for (var i = 0; i < firstImageClass.length; i++) {
+				if ( $('.center-box').hasClass( firstImageClass[i] ) ) {
+					return true;
+				}
+			};
+
+			return false;
+		},
+		checkIfLastImage = function(){
+			var lastImageClass = $(lastImageElement).attr('class').split(' ');
+			for (var i = 0; i < lastImageClass.length; i++) {
+				if ( $('.center-box').hasClass( lastImageClass[i] ) ) {
+					return true;
+				}
+			};
+			return false;
+		};
 
 		$(this.nextButton).addClass('btn-next');
 		$(this.prevButton).addClass('btn-prev');
 
 		// Click event for next button
 		
-		$(document).on('click', '.btn-next',function(e){
-			// debugger;
-			if( $('.center-box > img').attr('src') === $(lastImageElement).find('img').attr('src') ){
-				e.preventDefault();
-			}
-
-			else{
+		$(document).unbind().on('click', '.btn-next',function(e){
+			if( !checkIfLastImage() ){
 				var nextImage = $(nextImageElement).attr('src');
+				$('.center-box').attr('class','center-box');
+				$('.center-box').addClass( $(nextImageElement).parent().attr('class') );
+				$('.center-box').removeClass('ui-sortable-handle');
 
 				$('.center-box > img').attr('src',nextImage);
 				updateNextImage();
+
+			console.log('next' + $(nextImageElement).attr('src'));
+		console.log($(currentImageElement).attr('src'));
+		console.log($(prevImageElement).attr('src'));
 			}
 		});
 
 		// Click event for prev button
-		$(document).on('click', '.btn-prev',function(e){
-			if( $('.center-box > img').attr('src') ===  $(firstImageElement).find('img').attr('src') ){
-				e.preventDefault();
-			}
-
-			else{
+		$(document).unbind('.btn-prev').on('click', '.btn-prev',function(e){
+			if( !checkIfFirstImage() ){
 				var prevImage = $(prevImageElement).attr('src');
+				$('.center-box').attr('class','center-box');
+				$('.center-box').addClass( $(prevImageElement).parent().attr('class') );
+				$('.center-box').removeClass('ui-sortable-handle');
 
 				$('.center-box > img').attr('src',prevImage);
 				updatePrevImage();
+
+
+			console.log('prev' + $(nextImageElement).attr('src'));
+		console.log($(currentImageElement).attr('src'));
+		console.log($(prevImageElement).attr('src'));
 			}
 		});
 
