@@ -124,9 +124,9 @@
 		$(this.nextButton).addClass('btn-next');
 		$(this.prevButton).addClass('btn-prev');
 
-		// Click event for next button
-		
-		$(document).unbind().on('click', '.btn-next',function(e){
+		console.log('test');
+		$(document).unbind('.btn-next').on('click', '.btn-next',function(e){
+			console.log('next button');
 			if( !checkIfLastImage() ){
 				var nextImage = $(nextImageElement).attr('src');
 				$('.center-box').attr('class','center-box');
@@ -135,11 +135,8 @@
 
 				$('.center-box > img').attr('src',nextImage);
 				updateNextImage();
-
-			console.log('next' + $(nextImageElement).attr('src'));
-		console.log($(currentImageElement).attr('src'));
-		console.log($(prevImageElement).attr('src'));
 			}
+			console.log(nextImageElement);
 		});
 
 		// Click event for prev button
@@ -152,11 +149,6 @@
 
 				$('.center-box > img').attr('src',prevImage);
 				updatePrevImage();
-
-
-			console.log('prev' + $(nextImageElement).attr('src'));
-		console.log($(currentImageElement).attr('src'));
-		console.log($(prevImageElement).attr('src'));
 			}
 		});
 
